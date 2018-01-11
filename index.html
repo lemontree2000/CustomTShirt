@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>定制</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="less/custom.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <script src="js/modernizr.custom.js"></script>
+</head>
+
+<body>
+    <div id="custom">
+        <div class="type-version">
+            <div class="type-version-head">
+                <i class="x-colse"></i>
+                <span>版型</span>
+            </div>
+            <ul id="elasticstack" class="elasticstack">
+                <li v-for="item in TypeVersionList">
+                    <h3 v-text="item.category_name"></h3>
+                    <img width="84%" :src="item.color_img_f" alt="item.category_name" />
+                    <div class="button-box">
+                        <button @touchstart.stop="selectType(item)">开始创造</button>
+                    </div>
+                    <span class="left"></span>
+                    <span class="right"></span>
+                </li>
+            </ul>
+        </div>
+        <transition name="slide">
+            <div class="making-table" v-clock v-show="makingTableFlag">
+                <div class=making-table-head>
+                    <i class="x-colse"></i>
+                    <button class="save-btn">保存</button>
+                </div>
+                <div class="canvas-box">
+                    <img width="120%" v-if="!currentItem.backEnd" :src="currentItem.img_f" alt="">
+                    <img width="120%" v-else :src="currentItem.img_b" alt="">
+                    <canvas></canvas>
+                    <span class="quick-tool first">
+                        <img width="50%" src="./Image/shua.png" alt="">
+                    </span>
+                    <span class="quick-tool center">正</span>
+                    <span class="quick-tool last">详情</span>
+                </div>
+                <div class="footer-tool">
+                    <ul class="tool-box">
+                        <li>
+                            <div>
+                                <img width="30" src="./Image/ban.png" alt="">
+                            </div>
+                            <span>版型</span>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="./Image/color.png" alt="">
+                            </div>
+                            <span>颜色</span>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="./Image/zhaop.png" alt="">
+                            </div>
+                            <span>照片</span>
+                        </li>
+                        <li @click="showInterestImage">
+                            <div>
+                                <img src="./Image/tu.png" alt="">
+                            </div>
+                            <span>趣图</span>
+                        </li>
+                        <li @click="showInterestTextFlag">
+                            <div>
+                                <img src="./Image/wen.png" alt="">
+                            </div>
+                            <span>趣文</span>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="./Image/tuya.png" alt="">
+                            </div>
+                            <span>涂鸦</span>
+                        </li>
+                    </ul>
+                    <ul class="pages">
+                        <li class="active"></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </transition>
+        <transition name="slide">
+            <div class="interest-image" v-show="interestImageFlag">
+                <div class="interest-image-content">
+                    <div class="interest-head">
+                        <i class="x-colse"></i>
+                        <div class="input-box">
+                            <span>
+                                趣我家族来袭，带你嗨!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="interest-image-wrapper">
+                        <div class="swpie-head">
+                            <ul>
+                                <li class="active">我的</li>
+                                <li>推荐</li>
+                                <li>小黄人</li>
+                                <li>兔斯基</li>
+                                <li>星球大战</li>
+                                <li>迪士尼</li>
+                            </ul>
+                        </div>
+                        <div class="content">
+                            <div class="me" style="display: none;">
+                                <div class="title">最近使用</div>
+                                <ul class="swipe-list">
+                                    <li class="swipe-item">
+                                        <ul>
+                                            <li class="item-z">
+                                                <div>
+                                                    <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925683c2d21.png" alt="">
+                                                    <span>ip图</span>
+                                                </div>
+                                            </li>
+                                            <li class="item-z">
+                                                <div>
+                                                    <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925683c2d21.png" alt="">
+                                                    <span>ip图</span>
+                                                </div>
+                                            </li>
+                                            <li class="item-z">
+                                                <div>
+                                                    <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925683c2d21.png" alt="">
+                                                    <span>ip图</span>
+                                                </div>
+                                            </li>
+                                            <li class="item-z">
+                                                <div>
+                                                    <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925683c2d21.png" alt="">
+                                                    <span>ip图</span>
+                                                </div>
+                                            </li>
+                                            <li class="item-z">
+                                                <div>
+                                                    <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925683c2d21.png" alt="">
+                                                    <span>ip图</span>
+                                                </div>
+                                            </li>
+                                            <li class="item-z">
+                                                <div>
+                                                    <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925683c2d21.png" alt="">
+                                                    <span>ip图</span>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="nav-tip">
+                                    <li class="active"></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="recommend" style="display: none;">
+                                <div class="recommend-item like">
+                                    <div class="recommend-item-head ">猜你喜欢</div>
+                                    <ul class="">
+                                        <li class="swipe-item">
+                                            <ul class="swipe-list">
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/599255fe5996d.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/599255fe5996d.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/599255fe5996d.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/599255fe5996d.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/599255fe5996d.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/599255fe5996d.png" alt="">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav-tip">
+                                        <li class="active"></li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                                <div class="recommend-item reco">
+                                    <div class="recommend-item-head ">套餐推荐</div>
+                                    <ul>
+                                        <li class="swipe-item">
+                                            <ul class="swipe-list">
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925567b9d39.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925567b9d39.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925567b9d39.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div>
+                                                        <img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/59925567b9d39.png" alt="">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                            </ul>
+                                            </li>
+                                    </ul>
+                                    <ul class="nav-tip">
+                                        <li class="active"></li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="public" style="display: none;">
+                                <div class="public-head">
+                                    <div class="line"></div>
+                                    <span class="text">小黄人</span>
+                                </div>
+                                <div class="public-content">
+                                    <div class="image-item">
+                                        <ul>
+                                            <li class="swipe-item">
+                                                <ul class="swipe-list">
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div>
+                                                            <img src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" width="100%" alt="">
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="interest-image-search" style="display: none;">
+                    <div class="image-search-head">
+                        <input type="text" placeholder="趣我家族来袭，带你嗨">
+                        <span>取消</span>
+                    </div>
+                    <!-- <div class="search-result">
+                        <div class="result-count">帮你找到22条数据</div>
+                        <ul class="result-content">
+                                <li>
+                                    <img height="24" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" alt="">
+                                    <span class="result-text">小黄人1</span>
+                                </li>
+                                <li>
+                                    <img height="24" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" alt="">
+                                    <span class="result-text">小黄人1</span>
+                                </li>
+                                <li>
+                                    <img height="24" src="http://sq.51yna.com//Uploads/Picture/2017-08-15/5992564e1518f.png" alt="">
+                                    <span class="result-text"></span>小黄人1</span>
+                                </li>
+                        </ul>
+                    </div> -->
+                    <div class="search-history">
+                        <div class="search-history-box">
+                            <div class="history-box-title">热门搜索</div>
+                            <ul>
+                                <li>米奇</li>
+                                <li>冰雪奇缘</li>
+                                <li>米妮</li>
+                                <li>小黄人</li>
+                                <li>米奇</li>
+                                <li>冰雪奇缘</li>
+                                <li>米妮</li>
+                                <li>小黄人</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-box" >
+                    <h3>米奇</h3>
+                    <div class="show-img">
+                        <img src="http://sq.51yna.com//Uploads/Picture/2017-07-27/5979d7dad10e3.jpg">
+                    </div>
+                    <div class="select-wrapper">
+                        <div class="select-list-box">
+                            <ul class="select-list">
+                                <li><img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-07-27/5979d7dad10e3.jpg" alt=""></li>
+                                <li><img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-07-27/5979d7dad10e3.jpg" alt=""></li>
+                                <li><img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-07-27/5979d7dad10e3.jpg" alt=""></li>
+                                <li><img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-07-27/5979d7dad10e3.jpg" alt=""></li>
+                                <li><img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-07-27/5979d7dad10e3.jpg" alt=""></li>
+                                <li><img width="100%" src="http://sq.51yna.com//Uploads/Picture/2017-07-27/5979d7dad10e3.jpg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="select-cosle-btn"></div>
+                    <div class="use-btn">立即使用</div>
+                </div>
+                <div class="select-box-mask"></div>
+            </div>
+        </transition>
+        <transition name="slide">
+            <div class="interest-text" v-show="interestTextFlag">
+                <div class="interest-text-head">
+                    <i class="x-colse" @click="interestTextFlag=false"></i>
+                    <span class="interest-text-title">
+                        可编辑的趣字
+                    </span>
+                </div>
+                <div class="interest-text-wrapper">
+                    <div class="swpie-head">
+                        <ul>
+                            <li :class="{'active': '全部' === TextNavName}" @click="getTextIndex">全部</li>
+                            <li :class="{'active': '推荐' === TextNavName}" @click="TextNavName = '推荐'">推荐</li>
+                            <li v-for="item in textNavList" @click="selectTextType(item)" :class="{'active': item.name === TextNavName}" v-text="item.name"></li>
+                        </ul>
+                    </div>
+                    <div class="interest-text-content" v-show="'推荐' !== TextNavName || '全部' !== TextNavName" >
+                        <ul>
+                            <li v-for="item in textList">
+                                <img width="100%" :src="item.pic" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="interest-text-content" v-show="'全部' == TextNavName">
+                        <ul v-for="item in allTextList">
+                            <li v-for="listItem in item.list">
+                                <img width="100%" :src="listItem.pic" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="recommend-text" v-show="'推荐' === TextNavName">
+                        <div class="new-text">
+                            <div class="head">1</div>
+                            <div class="swipe-content swiper-container swipe-text">
+                                <ul class="swiper-wrapper">
+                                    <li class="swiper-slide" v-for="item in RecNewTextList">
+                                        <img width="100%" :src="item.pic" alt="">
+                                    </li>
+                                </ul>
+                                <ul class="navgai">
+                                    <li class="active"></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="prev"></div>
+                            <div class="next"></div>
+                        </div>
+                        <div class="hot-recommend">
+                            <div class="head">1</div>
+                            <div class="hot-content">
+                                <ul>
+                                    <li v-for="item in RecTextList">
+                                        <img width="100%" :src="item.pic" alt="">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+    <script src="js/draggabilly.pkgd.min.js"></script>
+    <script src="js/elastiStack.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        // 初始化Vue
+        Vue.config.devtools = true
+        var HOST_URL = 'http://sq.51yna.com/';
+        var App = new Vue({
+            el: '#custom',
+            data: {
+                makingTableFlag: false,
+                interestImageFlag: false,
+                interestTextFlag: false,
+                currentItem: {},
+                TypeVersionList: [],
+                RecTextList: [],
+                textList: [],
+                allTextList: [],
+                textNavList: [],
+                RecNewTextList: [],
+                TextNavName: '推荐'
+            },
+            methods: {
+                // 初始化选版型组件                
+                initElastiStack: function () {
+                    new ElastiStack(document.getElementById('elasticstack'), {
+                        // distDragBack: if the user stops dragging the image in a area that does not exceed [distDragBack]px 
+                        // for either x or y then the image goes back to the stack 
+                        distDragBack: 200,
+                        // distDragMax: if the user drags the image in a area that exceeds [distDragMax]px 
+                        // for either x or y then the image moves away from the stack 
+                        distDragMax: 200,
+                        // callback
+                        onUpdateStack: function (current) { console.log(current); return false; }
+                    });
+                },
+                // 获取衣服款式
+                getTypeVersion: function () {
+                    var self = this;
+                    $.get(HOST_URL + 'Api/Custom', {
+                        action: 'category',
+                        debug: 1,
+                        data: '{"login_uid":"800","timestamp":"1512027165","sign":"9e82f14a3d159fdc7fe958d86f2274c4"}'
+                    }, function (data) {
+                        var res = JSON.parse(data);
+                        if (res.status === 200) {
+                            self.TypeVersionList = res.data.list;
+                            self.$nextTick(function () {
+                                self.initElastiStack()
+                            });
+                        }
+                    })
+                },
+                // 打开趣图版块
+                showInterestImage: function () {
+                    this.interestImageFlag = true;
+                },
+                // 打开趣字版块
+                showInterestTextFlag: function() {
+                    var self = this;
+                    this.getRecText(function() {
+                        self.getInterestTextNav(function() {
+                            self.interestTextFlag = true;
+                            self.$nextTick(function() {
+                                self.swipeText = new Swiper('.swipe-text', {
+                                    navigation: {
+                                        nextEl: '.next',
+                                        prevEl: '.prev',
+                                    },
+                                    loop : true,
+                                    autoplay: true
+                                });
+                            });
+                        });
+                    });
+                    // this.interestTextFlag = true;
+                },
+                // 选择要定制的版型
+                selectType: function(item) {
+                    this.currentItem = item;
+                    this.makingTableFlag = true;
+                },
+                // 获取趣字导航条数据
+                getInterestTextNav: function(cb) {
+                    var self = this;
+                    $.get(HOST_URL + 'Api/Custom', {
+                        action: 'get_inster_category',
+                        debug: 1,
+                        data: '{"login_uid":"800","timestamp":"1513048199","sign":"13c0364260b969ae960e3921a9b6a978"}'
+                    }, function(data) {
+                        var res = JSON.parse(data);
+                        if (res.status === 200) {
+                            self.textNavList = res.data.list;
+                            cb && cb();
+                        } else {
+                            alert(res.msg);
+                        }
+                    })
+                },
+                // 不同趣字的类型的数据
+                selectTextType: function(item, cb) {
+                    this.textList = [];
+                    var self = this;
+                    $.get(HOST_URL + 'Api/Custom', {
+                        action: 'get_inster_text',
+                        debug: 1,
+                        data: '{"category_id":'+ item.id +',"login_uid":"800","timestamp":"1513146006","sign":"8049ec9ac91bf8a0f4f0e07a4eaf1a10"}'
+                    },function (data) {
+                        var res = JSON.parse(data);
+                        if (res.status === 200) {
+                            self.TextNavName = item.name;
+                            self.textList = res.data.list;
+                            cb && cb();
+                        } else {
+                            alert(res.msg);
+                        }
+                    })
+                },
+                // 获取趣字的推荐页数据                
+                getRecText: function(cb) {
+                    var self = this;
+                    $.get(HOST_URL + 'Api/Custom', {
+                        action: 'get_inster_text',
+                        debug: 1,
+                        data: '{"is_rec":"1","login_uid":"800","timestamp":"1513048199","sign":"13c0364260b969ae960e3921a9b6a978"}'
+                    }, function(data) {
+                        var res = JSON.parse(data);
+                        if (res.status === 200) {
+                            self.RecTextList = res.data.list;
+                            self.RecNewTextList = res.data.new_list;
+                            cb && cb();
+                        } else {
+                            alert(res.msg);
+                        }
+                    })
+                },
+                // 获取趣字所有数据
+                getTextIndex: function() {
+                    var self = this;
+                    $.get(HOST_URL + 'Api/Custom', {
+                        action: 'get_inster_index',
+                        debug: 1,
+                        data: '{"login_uid":"800","timestamp":"1513146718","sign":"3f77a6fcf79d8af80e6408478abfc410"}'
+                    }, function(data) {
+                        var res = JSON.parse(data);
+                        console.log(res);
+                        if (res.status === 200) {
+                            self.TextNavName = '全部';
+                            self.allTextList = res.data.list;
+                        }
+                    });
+                }
+            },
+            mounted: function () {
+            },
+            created: function () {
+                this.getTypeVersion();
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+<!-- <div class="article-start-box">
+        <span class="categery">分类栏目</span>
+        <select style="position: absolute;z-index: 1;margin-left: 40px;"  class="choose"
+        onmousedown="if(this.options.length>6){this.size=7}" onblur="this.size=0" onchange="this.size=0">
+            <option value="volvo">文学集</option>
+            <option value="saab">哲学</option>
+            <option value="opel">雅思</option>
+            <option value="audi">大学网奥数大学网奥数</option>
+            <option value="volvo">文学集</option>
+            <option value="saab">哲学</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="opel">雅思</option>
+            <option value="audi">大学网奥数</option>
+        </select>
+    </div> -->
